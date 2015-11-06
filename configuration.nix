@@ -38,6 +38,7 @@
 
     nginx = {
       enable = true;
+      config = pkgs.lib.readFile ./conf/nginx.conf;
     };
 
   };
