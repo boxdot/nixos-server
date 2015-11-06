@@ -45,6 +45,8 @@
 
   # Users
 
+  users.mutableUsers = false;
+
   users.extraUsers.nixos = {
     isNormalUser = true;
     uid = 1000;
@@ -57,6 +59,7 @@
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [ "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDZ6cQd+3L2dbeB6jEl3lUeiYsxYuN7FO4AQMCz/SpEdBXjKAQlz7L5jUo+4EGux4ziF7pDlVPZpV6WSoW5kmJc= dimw@snow" ];
     shell = "/run/current-system/sw/bin/zsh";
+    passwordFile = "/etc/nixos/dima.passwd";
   };
 
 
