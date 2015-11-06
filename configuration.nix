@@ -11,6 +11,7 @@
   boot.loader.grub.device = "/dev/vda";
 
   networking.hostName = "nixos";
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   time.timeZone = "Europe/Berlin";
 
