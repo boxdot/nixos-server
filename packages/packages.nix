@@ -7,8 +7,8 @@ rec {
 
   # our packages
 
-  website = pkgs.callPackage ./pkgs/website { };
+  website = pkgs.callPackage ./website { };
 
-  dotfiles = pkgs.callPackage ./pkgs/dotfiles { };
+  dotfiles = pkgs.callPackage ./dotfiles { };
 
 }

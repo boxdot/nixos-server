@@ -3,7 +3,7 @@
 stdenv.mkDerivation rec {
   name = "dotfiles";
 
-  src = ../../dotfiles;
+  src = ./src;
   builder = writeScript "builder.sh"
     ''
       source $stdenv/setup
