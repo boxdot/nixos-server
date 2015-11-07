@@ -11,5 +11,6 @@ Configuration of my server based on NixOS
 
 ## Persistent data
 
-postgresql
-: `/data/postgresql`
+postgresql : `/data/postgresql`
+elasticsearch : `/data/elasticsearch`
+kibana : `/data/kibana`
