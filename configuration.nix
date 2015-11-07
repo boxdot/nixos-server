@@ -44,6 +44,12 @@ in
       passwordAuthentication = false;
     };
 
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresq194;
+      dataDir = "/data/postgresql";
+    };
+
     nginx = {
       enable = true;
       config = ''
