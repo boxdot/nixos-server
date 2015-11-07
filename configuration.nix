@@ -46,7 +46,7 @@ in
 
     postgresql = {
       enable = true;
-      package = pkgs.postgresq194;
+      package = pkgs.postgresql94;
       dataDir = "/data/postgresql";
     };
 
