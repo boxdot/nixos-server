@@ -11,6 +11,6 @@ rec {
 
   dotfiles = pkgs.callPackage ./dotfiles { };
 
-  subl = pkgs.callPackage ./subl { };
+  rmate = pkgs.callPackage ./rmate { };
 
 }

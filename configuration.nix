@@ -31,7 +31,7 @@ in
         custompkgs.website
 
         custompkgs.dotfiles
-        custompkgs.subl
+        custompkgs.rmate
       ];
 
   programs.zsh.enable = true;
