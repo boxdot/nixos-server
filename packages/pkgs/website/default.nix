@@ -1,11 +1,10 @@
-{ stdenv, nginx }:
+{ stdenv }:
 
 stdenv.mkDerivation rec {
   name = "website-0.0.1";
 
   src = ../../website;
   builder = ./builder.sh;
-  # buildInputs = [];
 
   meta = {
     description = "A static website.";
