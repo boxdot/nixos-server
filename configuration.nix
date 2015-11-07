@@ -7,6 +7,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/kibana.nix
     ];
 
   boot.loader.grub.enable = true;
@@ -14,7 +15,11 @@ in
   boot.loader.grub.device = "/dev/vda";
 
   networking.hostName = "nixos";
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts =
+    [ 80    # http
+      443   # https
+      5601  # kibana
+    ];
 
   time.timeZone = "Europe/Berlin";
 
@@ -36,6 +41,10 @@ in
 
   programs.zsh.enable = true;
 
+  nixpkgs.config.packageOverrides = pkgs : {
+    elasticsearch = custompkgs.elasticsearch;
+  };
+
 
   # Services
 
@@ -56,6 +65,20 @@ in
     nginx = {
       enable = true;
       config = import ./conf/nginx.nix { inherit pkgs custompkgs; };
+    };
+
+    elasticsearch = {
+      enable = true;
+      # FIXME: This option is already on master, but is not present in 15.09
+      # package = custompkgs.elasticsearch;
+      dataDir = "/data/elasticsearch";
+    };
+
+    kibana = {
+      enable = true;
+      package = custompkgs.kibana;
+      host = "0.0.0.0";
+      dataDir = "/data/kibana";
     };
 
   };

@@ -11,6 +11,12 @@ rec {
 
   dotfiles = pkgs.callPackage ./dotfiles { };
 
+  # custom packages
+
   rmate = pkgs.callPackage ./rmate { };
+
+  elasticsearch = pkgs.callPackage ./elasticsearch { };
+
+  kibana = pkgs.callPackage ./kibana { };
 
 }
