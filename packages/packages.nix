@@ -9,4 +9,6 @@ rec {
 
   website = pkgs.callPackage ./pkgs/website { };
 
+  dotfiles = pkgs.callPackage ./pkgs/dotfiles { };
+
 }

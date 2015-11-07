@@ -29,6 +29,7 @@ in
         tree
 
         custompkgs.website
+        custompkgs.dotfiles
       ];
 
   programs.zsh.enable = true;
@@ -76,6 +77,19 @@ in
     shell = "/run/current-system/sw/bin/zsh";
     passwordFile = "/etc/nixos/dima.passwd";
   };
+
+  system.activationScripts.dotfiles =
+    ''
+      for user in `ls -d ${custompkgs.dotfiles}/*/ | xargs basename`; do
+        if [ -e /home/$user ]; then
+          for dotfile in `ls -d ${custompkgs.dotfiles}/$user/.*`; do
+            if [ -f $dotfile ]; then
+              ln -sf $dotfile /home/$user/
+            fi
+          done
+        fi
+      done
+    '';
 
 
   # The NixOS release to be compatible with for stateful data such as databases.

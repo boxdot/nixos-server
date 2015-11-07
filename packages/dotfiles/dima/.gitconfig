@@ -1,0 +1,31 @@
+[user]
+  name = boxdot 
+  email = d@zerovolt.org 
+
+[filter "media"]
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
+
+[push]
+  default = simple
+
+[core]
+  editor = subl -w
+  excludesfile = /Users/dimw/.gitignore_global
+  preloadindex = true
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+
+[alias]
+    hist = log --pretty=format:\"%h %ad   %s%d [%an]\" --graph --date=short
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    type = cat-file -t
+    dump = cat-file -p
+
