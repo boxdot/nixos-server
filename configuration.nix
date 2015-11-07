@@ -29,7 +29,9 @@ in
         tree
 
         custompkgs.website
+
         custompkgs.dotfiles
+        custompkgs.subl
       ];
 
   programs.zsh.enable = true;
