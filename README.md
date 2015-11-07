@@ -7,8 +7,8 @@ Configuration of my server based on NixOS
 3. Use `mkpasswd -m sha-512 > /etc/nixos/dima.passwd` to store password on the server.
 4. Rebuild configuration with `nixos-rebuild switch`.
 5. Enjoy!
-6. 
 
 ## Persistent data
 
-* postgresql: `/data/postgresql`
+postgresql
+: `/data/postgresql`
