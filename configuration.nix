@@ -21,7 +21,7 @@ in
       5601  # kibana
     ];
 
-  time.timeZone = "Europe/Berlin";
+  time.timeZone = "UTC";
 
 
   # Programs
