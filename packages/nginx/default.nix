@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, fetchFromGitHub, openssl, zlib, pcre, libxml2, libxslt, expat, clang
+{ stdenv, fetchurl, fetchFromGitHub, openssl, zlib, pcre, libxml2, libxslt, expat, passenger-nginx, ruby
 , gd, geoip, luajit
 , rtmp ? false
 , fullWebDAV ? false
@@ -84,14 +84,6 @@ let
     sha256 = "1cqcasp4lc6yq5pihfcdw4vp4wicngvdc3nqg3bg52r63c1qrz76";
   };
 
-  passenger-ext = fetchFromGitHub {
-    owner = "phusion";
-    repo = "passenger";
-    rev = "release-5.0.21";
-    sha256 = "invalid";
-  };
-
-
 in
 
 stdenv.mkDerivation rec {
@@ -101,7 +93,8 @@ stdenv.mkDerivation rec {
   buildInputs =
     [ openssl zlib pcre libxml2 libxslt gd geoip
     ] ++ optional fullWebDAV expat
-      ++ optional ngx_lua luajit;
+      ++ optional ngx_lua luajit
+      ++ optional passenger ruby;
 
   LUAJIT_LIB = if ngx_lua then "${luajit}/lib" else "";
   LUAJIT_INC = if ngx_lua then "${luajit}/include/luajit-2.0" else "";
@@ -143,7 +136,7 @@ stdenv.mkDerivation rec {
     ++ optionals (elem stdenv.system (with platforms; linux ++ freebsd))
         [ "--with-file-aio" "--with-aio_module" ]
     ++ optional fluent "--add-module=${fluentd}"
-    ++ optional passenger "--add-module=${passenger-ext}"
+    ++ optional passenger "--add-module=${passenger-nginx}/src/nginx_module"
     ++ (map (m: "--add-module=${m}") extraModules);
 
 

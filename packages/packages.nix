@@ -19,7 +19,7 @@ rec {
 
   kibana = pkgs.callPackage ./kibana { };
 
-  passenger = pkgs.callPackage ./passenger { };
+  passenger-nginx = pkgs.callPackage ./passenger { };
 
   nginx = pkgs.callPackage ./nginx {
     rtmp        = true;
@@ -27,6 +27,8 @@ rec {
     syslog      = false; # the patch is not found
     moreheaders = true;
     passenger   = true;
+
+    passenger-nginx = passenger-nginx;
   };
 
 }

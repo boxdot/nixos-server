@@ -1,4 +1,6 @@
-{ stdenv, writeScript, fetchurl, curl, openssl, gzip }:
+{ stdenv, file, writeScript, fetchurl, curl, openssl, gzip, ruby
+, libuv, darwin
+}:
 
 let
   version = "5.0.21";
@@ -12,17 +14,32 @@ stdenv.mkDerivation rec {
     sha1 = "ffmaz1f32vya0lrinlisy45pyf9m7d3x";
   };
 
-  buildInputs = [curl openssl gzip];
+  buildInputs = [curl openssl gzip ruby file libuv]
+    ++ stdenv.lib.optional stdenv.isDarwin [ darwin.libobjc ];
 
-  builder = writeScript "builder.sh"
-    ''
-      source $stdenv/setup
+  enableParallelBuilding = true;
 
-      tar zxf $src
-      cd passenger*/
-      mkdir -p $out
-      mv * $out/
-    '';
+  postUnpack =
+  ''
+    rm -f passenger*/configure
+  '';
+
+  patchPhase = stdenv.lib.optionalString stdenv.isDarwin
+  ''
+    substituteInPlace src/nginx_module/config --replace stdc++ c++
+  '';
+
+  buildPhase =
+  ''
+    export USE_VENDORED_LIBUV=no
+    rake nginx CACHING=false
+  '';
+
+  installPhase =
+  ''
+    ensureDir $out
+    cp -r * $out/
+  '';
 
   meta = {
     description = "Phusion Passenger: a fast and robust web server and application server for Ruby, Python and Node.js";
