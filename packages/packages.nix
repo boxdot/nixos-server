@@ -9,6 +9,8 @@ rec {
 
   website = pkgs.callPackage ./website { };
 
+  ruby-project = pkgs.callPackage ./ruby-project { };
+
   dotfiles = pkgs.callPackage ./dotfiles { };
 
   # custom packages
