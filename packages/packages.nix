@@ -19,4 +19,14 @@ rec {
 
   kibana = pkgs.callPackage ./kibana { };
 
+  passenger = pkgs.callPackage ./passenger { };
+
+  nginx = pkgs.callPackage ./nginx {
+    rtmp        = true;
+    fullWebDAV  = true;
+    syslog      = false; # the patch is not found
+    moreheaders = true;
+    passenger   = true;
+  };
+
 }
