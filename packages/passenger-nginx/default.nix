@@ -7,7 +7,7 @@ let
 in
 
 stdenv.mkDerivation rec {
-  name = "passenger-${version}";
+  name = "passenger-nginx-${version}";
 
   src = fetchurl {
     url = "https://s3.amazonaws.com/phusion-passenger/releases/passenger-${version}.tar.gz";
@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
   '';
 
   meta = {
-    description = "Phusion Passenger: a fast and robust web server and application server for Ruby, Python and Node.js";
+    description = "Phusion Passenger: a fast and robust web server and application server for Ruby, Python and Node.js. With native nginx extension.";
     license = stdenv.lib.licenses.mit;
   };
 }
